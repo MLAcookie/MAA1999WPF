@@ -25,7 +25,7 @@ public static class ConfigInterface
     /// <summary>
     /// M9A任务，每个任务由名称和一系列选项组成
     /// </summary>
-    public class Task
+    public class M9ATaskType
     {
         /// <summary>
         /// 任务名
@@ -41,7 +41,7 @@ public static class ConfigInterface
     /// <summary>
     /// 指示任务，具体内容见Task
     /// </summary>
-    public static readonly List<Task> task = new();
+    public static readonly List<M9ATaskType> TaskTypes = new();
 
     /// <summary>
     /// 指示玩的是哪个服的游戏
@@ -71,7 +71,7 @@ public static class ConfigInterface
         var tasks = json["task"]!.AsArray();
         foreach (var item in tasks)
         {
-            var task_new = new Task()
+            var task_new = new M9ATaskType()
             {
                 name = item!["name"]!.ToString(),
             };
@@ -87,7 +87,7 @@ public static class ConfigInterface
                 }
             }
 
-            task.Add(task_new);
+            TaskTypes.Add(task_new);
         }
 
         // 获取所有服务器

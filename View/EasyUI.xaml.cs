@@ -131,7 +131,10 @@ namespace M9AWPF.View
             {
                 var panel = new StackPanel();
                 panel.Orientation = Orientation.Horizontal;
-                var opt = new OptionTemplate(option, EasyUIViewModel.OptionMap2Values[option]);
+                var opt = new OptionTemplate(
+                    option,
+                    EasyUIViewModel.OptionMap2Values[option].ToList()
+                );
                 stackPanel!.Children.Add(opt);
             }
         }

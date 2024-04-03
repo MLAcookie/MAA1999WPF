@@ -25,7 +25,7 @@ public class EasyUIViewModel : ObservableObject
         get
         {
             var res = new List<string>();
-            foreach (var t in ConfigInterface.task)
+            foreach (var t in ConfigInterface.TaskTypes)
                 res.Add(t.name);
             return res.ToArray();
         }
@@ -39,7 +39,7 @@ public class EasyUIViewModel : ObservableObject
         get
         {
             var res = new Dictionary<string, string[]>();
-            foreach (var item in ConfigInterface.task)
+            foreach (var item in ConfigInterface.TaskTypes)
             {
                 var li = new List<string>();
                 foreach (var t in item.option)

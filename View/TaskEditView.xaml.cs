@@ -1,28 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using M9AWPF.Control;
+using M9AWPF.ViewModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace M9AWPF.View
+namespace M9AWPF.View;
+
+/// <summary>
+/// TaskEditView.xaml 的交互逻辑
+/// </summary>
+public partial class TaskEditView : UserControl
 {
-    /// <summary>
-    /// TaskEditView.xaml 的交互逻辑
-    /// </summary>
-    public partial class TaskEditView : UserControl
+    public TaskEditView()
     {
-        public TaskEditView()
+        InitializeComponent();
+    }
+
+    private void TaskTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        TaskSettingPanel.Children.Clear();
+        var str = (sender as ComboBox)!.SelectedValue.ToString()!;
+
+        var options = TaskEditViewModel.TaskMap2Option[str];
+        if (options.Count == 0)
+            return;
+
+        foreach (var option in options)
         {
-            InitializeComponent();
+            var opt = new OptionTemplate(
+                option,
+                TaskEditViewModel.OptionMap2Values[option]
+            );
+            TaskSettingPanel.Children.Add(opt);
         }
     }
 }

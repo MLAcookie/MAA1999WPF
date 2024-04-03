@@ -16,7 +16,31 @@
             <ColumnDefinition Width="20" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <StackPanel Margin="5" />
+        <StackPanel Margin="5">
+            <hc:TimePicker
+                Margin="5"
+                hc:InfoElement.Placeholder="When To Start?"
+                hc:TitleElement.Title="Setting Time:"
+                hc:TitleElement.TitlePlacement="Left"
+                hc:TitleElement.TitleWidth="100"
+                Style="{StaticResource TimePickerExtend}"
+                TimeFormat="hh:mm" />
+            <hc:Divider
+                Margin="5"
+                LineStroke="LightGray"
+                LineStrokeThickness="2" />
+            <ComboBox
+                Margin="5"
+                hc:InfoElement.Placeholder="Choose Config File"
+                hc:TitleElement.Title="Config"
+                hc:TitleElement.TitlePlacement="Left"
+                hc:TitleElement.TitleWidth="100"
+                Style="{StaticResource ComboBoxExtend}" />
+            <Button
+                Margin="10,5"
+                HorizontalAlignment="Left"
+                Content="Add" />
+        </StackPanel>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition />

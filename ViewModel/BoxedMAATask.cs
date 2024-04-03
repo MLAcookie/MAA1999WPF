@@ -33,8 +33,10 @@ public class BoxedMAATask
     public List<string> OptionVals { get; set; } = new();
     public M9AConfigObject.Task ToMAATask()
     {
-        var res = new M9AConfigObject.Task();
-        res.name = Name;
+        var res = new M9AConfigObject.Task
+        {
+            name = Name
+        };
         for (int i = 0; i < Options.Count; i++)
         {
             var option = new M9AConfigObject.Option()
@@ -48,8 +50,10 @@ public class BoxedMAATask
     }
     public static BoxedMAATask FromMAATask(M9AConfigObject.Task task)
     {
-        var res = new BoxedMAATask();
-        res.Name = task.name;
+        var res = new BoxedMAATask
+        {
+            Name = task.name
+        };
         foreach (var item in task.option)
         {
             res.Options.Add(item.name);

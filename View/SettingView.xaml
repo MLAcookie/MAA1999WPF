@@ -16,21 +16,21 @@
             <StackPanel>
                 <TextBox
                     Margin="5"
-                    hc:InfoElement.Title="ADB Path: "
-                    hc:InfoElement.TitlePlacement="Left"
-                    hc:InfoElement.TitleWidth="120"
+                    hc:TitleElement.Title="ADB Path: "
+                    hc:TitleElement.TitlePlacement="Left"
+                    hc:TitleElement.TitleWidth="120"
                     Style="{StaticResource TextBoxExtend}" />
                 <TextBox
                     Margin="5"
-                    hc:InfoElement.Title="ADB Port: "
-                    hc:InfoElement.TitlePlacement="Left"
-                    hc:InfoElement.TitleWidth="120"
+                    hc:TitleElement.Title="ADB Port: "
+                    hc:TitleElement.TitlePlacement="Left"
+                    hc:TitleElement.TitleWidth="120"
                     Style="{StaticResource TextBoxExtend}" />
                 <ComboBox
                     Margin="5"
-                    hc:InfoElement.Title="Client Type: "
-                    hc:InfoElement.TitlePlacement="Left"
-                    hc:InfoElement.TitleWidth="120"
+                    hc:TitleElement.Title="Client Type: "
+                    hc:TitleElement.TitlePlacement="Left"
+                    hc:TitleElement.TitleWidth="120"
                     Style="{StaticResource ComboBoxExtend}" />
                 <hc:Divider
                     MaxWidth="480"
@@ -39,9 +39,9 @@
                     LineStrokeThickness="2" />
                 <TextBox
                     Margin="5"
-                    hc:InfoElement.Title="Http Proxy: "
-                    hc:InfoElement.TitlePlacement="Left"
-                    hc:InfoElement.TitleWidth="120"
+                    hc:TitleElement.Title="Http Proxy: "
+                    hc:TitleElement.TitlePlacement="Left"
+                    hc:TitleElement.TitleWidth="120"
                     Style="{StaticResource TextBoxExtend}" />
             </StackPanel>
         </hc:ScrollViewer>

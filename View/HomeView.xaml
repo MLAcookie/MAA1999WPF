@@ -16,7 +16,7 @@
             <ColumnDefinition Width="20" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <DockPanel>
+        <DockPanel Margin="10">
             <StackPanel Margin="10" DockPanel.Dock="Bottom">
                 <TextBlock DockPanel.Dock="Bottom" Text="M9A Version:" />
                 <TextBlock DockPanel.Dock="Bottom" Text="UI Version:" />
@@ -36,13 +36,14 @@
                     <ToggleButton
                         Name="UseTimerButton"
                         Grid.Column="1"
-                        Style="{DynamicResource ToggleButtonSwitch}" />
+                        Style="{StaticResource ToggleButtonSwitch}" />
                 </Grid>
                 <ComboBox
                     Width="300"
-                    hc:InfoElement.Title="Select config"
-                    hc:InfoElement.TitlePlacement="Left"
-                    hc:InfoElement.TitleWidth="100"
+                    hc:InfoElement.Placeholder="Choose Config File"
+                    hc:TitleElement.Title="Select config"
+                    hc:TitleElement.TitlePlacement="Left"
+                    hc:TitleElement.TitleWidth="100"
                     Style="{StaticResource ComboBoxExtend}"
                     Visibility="{Binding IsChecked, ElementName=UseTimerButton, Converter={StaticResource Boolean2VisibilityReConverter}}" />
             </StackPanel>
@@ -59,7 +60,7 @@
                 LineStrokeThickness="2"
                 Orientation="Vertical" />
         </Grid>
-        <Border Grid.Column="2">
+        <Border Grid.Column="2" Margin="10">
             <TextBlock Text="（放置任务简要，之后写）" />
         </Border>
     </Grid>

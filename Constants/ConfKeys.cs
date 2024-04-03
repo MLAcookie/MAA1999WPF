@@ -19,12 +19,15 @@ public static class ConfKeys
     // M9A可执行文件路径，适配v1.0.0+
     public static readonly string M9ABin = Path.Combine(M9ARoot, "MaaPiCli.exe");
 
-    //下载临时存放文件夹
+    // 下载临时存放文件夹
     public static readonly string TempDownload = "./temp";
 
-    //临时存放解压文件
+    // 临时存放解压文件
     public static readonly string TempLatest = Path.Combine(TempDownload, "latest");
 
-    //临时备份config
+    // 临时备份config
     public static readonly string TempConfigBackup = Path.Combine(TempDownload, "config");
+
+    // UI配置文件
+    public static readonly string UIConfig = "./UIConfig.json";
 }

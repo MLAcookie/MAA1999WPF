@@ -2,14 +2,19 @@
     x:Class="M9AWPF.View.TaskEditView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:M9AWPF.Control"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:M9AWPF.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:M9AWPF.ViewModel"
     d:Background="WhiteSmoke"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:TaskEditViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,14 +24,39 @@
         <StackPanel Margin="5">
             <ComboBox
                 Margin="5"
-                hc:InfoElement.Title="Config File:"
-                hc:InfoElement.TitlePlacement="Left"
-                hc:InfoElement.TitleWidth="100"
+                hc:InfoElement.Placeholder="Choose Config File"
+                hc:TitleElement.Title="Config File:"
+                hc:TitleElement.TitlePlacement="Left"
+                hc:TitleElement.TitleWidth="100"
                 Style="{StaticResource ComboBoxExtend}" />
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Button
+                    Width="60"
+                    Margin="5,0"
+                    Content="New" />
+                <Button
+                    Width="60"
+                    Margin="5,0"
+                    Content="Delete" />
+            </StackPanel>
             <hc:Divider
                 Margin="5"
                 LineStroke="LightGray"
                 LineStrokeThickness="2" />
+            <ComboBox
+                Margin="5"
+                hc:InfoElement.Placeholder="Choose Task Type"
+                hc:TitleElement.Title="Task Type:"
+                hc:TitleElement.TitlePlacement="Left"
+                hc:TitleElement.TitleWidth="100"
+                ItemsSource="{Binding AllTaskTypes}"
+                SelectionChanged="TaskTypeComboBox_SelectionChanged"
+                Style="{StaticResource ComboBoxExtend}" />
+            <StackPanel Name="TaskSettingPanel" />
+            <Button
+                Margin="10,5"
+                HorizontalAlignment="Left"
+                Content="Add" />
         </StackPanel>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -41,7 +71,7 @@
                 Orientation="Vertical" />
         </Grid>
         <Border Grid.Column="2">
-            <TextBlock Text="（TaskOverView，之后写）" />
+            <control:TaskOverview TaskSource="{Binding AllMAATasks}" />
         </Border>
     </Grid>
 </UserControl>
