@@ -4,33 +4,13 @@ using System.Windows;
 using System.Windows.Controls;
 using M9AWPF.ViewModel;
 
-namespace M9AWPF.Control;
+namespace M9AWPF.CustomControls;
 
 /// <summary>
 /// TaskOverview.xaml 的交互逻辑
 /// </summary>
 public partial class TaskOverview : Border
 {
-    List<BoxedMAATask> testTasks =
-        [
-            new BoxedMAATask
-            {
-                Name = "Test1",
-                Options = { "测试一", "测试二" },
-                OptionVals = { "1", "2" },
-            },
-            new BoxedMAATask
-            {
-                Name = "Test2",
-                Options = { "测试一", "测试二" },
-                OptionVals = { "1", "2" },
-            }
-        ];
-    public List<BoxedMAATask> TestTasks
-    {
-        get { return testTasks; }
-    }
-
     public List<BoxedMAATask> TaskSource
     {
         get { return (List<BoxedMAATask>)GetValue(TaskSourceProperty); }
@@ -42,6 +22,26 @@ public partial class TaskOverview : Border
         typeof(TaskOverview),
         null
     );
+
+    List<BoxedMAATask> testTasks =
+    [
+        new BoxedMAATask
+        {
+            Name = "Test1",
+            Options = { "测试一", "测试二" },
+            OptionVals = { "1", "2" },
+        },
+        new BoxedMAATask
+        {
+            Name = "Test2",
+            Options = { "测试一", "测试二" },
+            OptionVals = { "1", "2" },
+        }
+    ];
+    public List<BoxedMAATask> TestTasks
+    {
+        get { return testTasks; }
+    }
 
     public TaskOverview()
     {

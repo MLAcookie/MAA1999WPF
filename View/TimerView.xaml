@@ -37,6 +37,7 @@
                 hc:TitleElement.TitleWidth="100"
                 Style="{StaticResource ComboBoxExtend}" />
             <Button
+                Width="60"
                 Margin="10,5"
                 HorizontalAlignment="Left"
                 Content="Add" />

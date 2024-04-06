@@ -2,7 +2,7 @@
     x:Class="M9AWPF.View.TaskEditView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:control="clr-namespace:M9AWPF.Control"
+    xmlns:control="clr-namespace:M9AWPF.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:M9AWPF.View"
@@ -54,6 +54,7 @@
                 Style="{StaticResource ComboBoxExtend}" />
             <StackPanel Name="TaskSettingPanel" />
             <Button
+                Width="60"
                 Margin="10,5"
                 HorizontalAlignment="Left"
                 Content="Add" />

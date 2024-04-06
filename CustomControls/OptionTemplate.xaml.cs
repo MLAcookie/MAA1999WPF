@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace M9AWPF.Control
+namespace M9AWPF.CustomControls
 {
     /// <summary>
     /// 提供一个带标签的Combobox的模板
@@ -35,7 +35,6 @@ namespace M9AWPF.Control
             InitializeComponent();
             OptionName = optionName;
             OptionValues = optionValues;
-            DataContext = this;
         }
     }
 }

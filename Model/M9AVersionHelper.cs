@@ -23,9 +23,10 @@ namespace M9AWPF.Model
         //通过GithubAPI获取最新的release
         const string M9ALatestReleaseAPI =
             "https://api.github.com/repos/MaaXYZ/M9A/releases/latest";
-        
-        static HttpClient client = new HttpClient();
+
+        static HttpClient client = new();
         static GitHubReleaseObject latestRelease = null;
+
         //表示是否已经下载了
         public static bool HasDownloaded = false;
 

@@ -1,18 +1,18 @@
 ﻿<Border
-    x:Class="M9AWPF.Control.TaskOverview"
+    x:Class="M9AWPF.CustomControls.TaskOverview"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    Name="LocalBorder"
+    Name="RootBorder"
     d:Background="WhiteSmoke"
     d:DesignHeight="450"
     d:DesignWidth="450"
     mc:Ignorable="d">
     <hc:ScrollViewer>
-        <ItemsControl Name="TaskList_ItemControl" ItemsSource="{Binding TestTasks, ElementName=LocalBorder}">
+        <ItemsControl Name="TaskList_ItemControl" ItemsSource="{Binding TestTasks, ElementName=RootBorder}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="vm:BoxedMAATask">
                     <Border
@@ -23,8 +23,7 @@
                             <Grid>
                                 <!--  任务名称  -->
                                 <TextBlock
-                                    Name="Header_TextBlock"
-                                    Margin="10,10,0,5"
+                                    Margin="10,10,0,3"
                                     FontSize="14"
                                     FontWeight="Black"
                                     Text="{Binding Name}"

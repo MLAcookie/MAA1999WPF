@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using M9AWPF.Control;
+using M9AWPF.CustomControls;
 using M9AWPF.Model;
 using M9AWPF.ViewModel;
 
