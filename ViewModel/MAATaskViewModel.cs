@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using M9AWPF.JsonSerializeObject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,13 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using M9AWPF.JsonSerializeObject;
 
 namespace M9AWPF.ViewModel;
 
 /// <summary>
 /// 封装的MAA Task
 /// </summary>
-public class BoxedMAATask
+public class MAATaskViewModel
 {
     /// <summary>
     /// 任务名称
@@ -31,29 +31,21 @@ public class BoxedMAATask
     /// 任务选项对应的值
     /// </summary>
     public List<string> OptionVals { get; set; } = new();
+
     public M9AConfigObject.Task ToMAATask()
     {
-        var res = new M9AConfigObject.Task
-        {
-            name = Name
-        };
+        var res = new M9AConfigObject.Task { name = Name };
         for (int i = 0; i < Options.Count; i++)
         {
-            var option = new M9AConfigObject.Option()
-            {
-                name = Options[i],
-                value = OptionVals[i],
-            };
+            var option = new M9AConfigObject.Option() { name = Options[i], value = OptionVals[i], };
             res.option.Add(option);
         }
         return res;
     }
-    public static BoxedMAATask FromMAATask(M9AConfigObject.Task task)
+
+    public static MAATaskViewModel FromMAATask(M9AConfigObject.Task task)
     {
-        var res = new BoxedMAATask
-        {
-            Name = task.name
-        };
+        var res = new MAATaskViewModel { Name = task.name };
         foreach (var item in task.option)
         {
             res.Options.Add(item.name);
@@ -62,5 +54,3 @@ public class BoxedMAATask
         return res;
     }
 }
-
-

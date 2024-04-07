@@ -98,14 +98,14 @@ public class EasyUIViewModel : ObservableObject
     /// <summary>
     /// 所有任务
     /// </summary>
-    public static BoxedMAATask[] AllMAATasks
+    public static MAATaskViewModel[] AllMAATasks
     {
         get
         {
-            var res = new List<BoxedMAATask>();
+            var res = new List<MAATaskViewModel>();
             foreach (var item in ConfigManager.AllMAATasks)
             {
-                var boxedMAATask = BoxedMAATask.FromMAATask(item);
+                var boxedMAATask = MAATaskViewModel.FromMAATask(item);
                 res.Add(boxedMAATask);
             }
             return res.ToArray();
@@ -153,7 +153,7 @@ public class EasyUIViewModel : ObservableObject
     /// append task to the tail of ALLMAATasks
     /// </summary>
     /// <param name="task"></param>
-    public static void AppendTask(BoxedMAATask task)
+    public static void AppendTask(MAATaskViewModel task)
     {
         var res = AllMAATasks.ToList();
         res.Add(task);

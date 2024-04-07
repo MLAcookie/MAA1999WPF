@@ -1,15 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using M9AWPF.ViewModel;
 
 namespace M9AWPF.CustomControls;
 
 /// <summary>
-/// TaskOverview.xaml 的交互逻辑
+/// TimerOverview.xaml 的交互逻辑
 /// </summary>
-public partial class TaskOverview : Border
+public partial class TimerOverview : Border
 {
     #region TaskSource_propdp
     public List<MAATaskViewModel> TaskSource
@@ -20,7 +30,7 @@ public partial class TaskOverview : Border
     public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
         "TaskSource",
         typeof(List<MAATaskViewModel>),
-        typeof(TaskOverview),
+        typeof(TimerOverview),
         null
     );
     #endregion
@@ -37,33 +47,23 @@ public partial class TaskOverview : Border
         DependencyProperty.Register(
             "IsEnableContextMenu",
             typeof(bool),
-            typeof(TaskOverview),
+            typeof(TimerOverview),
             new PropertyMetadata(true)
         );
     #endregion
 
-    List<MAATaskViewModel> testTasks =
+    List<TimerTaskViewModel> testTasks =
     [
-        new MAATaskViewModel
-        {
-            Name = "Test1",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        },
-        new MAATaskViewModel
-        {
-            Name = "Test2",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        }
+        new TimerTaskViewModel { Time = "09:10", File = "Test1.json" },
+        new TimerTaskViewModel { Time = "09:20", File = "Test2.json" }
     ];
 
-    public List<MAATaskViewModel> TestTasks
+    public List<TimerTaskViewModel> TestTasks
     {
         get { return testTasks; }
     }
 
-    public TaskOverview()
+    public TimerOverview()
     {
         InitializeComponent();
     }

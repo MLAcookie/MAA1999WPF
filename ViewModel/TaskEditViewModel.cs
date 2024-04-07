@@ -39,14 +39,14 @@ public partial class TaskEditViewModel : ObservableObject
         }
     }
 
-    public static List<BoxedMAATask> AllMAATasks
+    public static List<MAATaskViewModel> AllMAATasks
     {
         get
         {
-            var res = new List<BoxedMAATask>();
+            var res = new List<MAATaskViewModel>();
             foreach (var item in ConfigManager.AllMAATasks)
             {
-                var boxedMAATask = BoxedMAATask.FromMAATask(item);
+                var boxedMAATask = MAATaskViewModel.FromMAATask(item);
                 res.Add(boxedMAATask);
             }
             return res;
@@ -66,5 +66,4 @@ public partial class TaskEditViewModel : ObservableObject
     static List<string> allTaskTypes = ConfigInterface
         .TaskTypes.Select((m9aTask) => m9aTask.name)
         .ToList();
-
 }

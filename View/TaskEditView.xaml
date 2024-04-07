@@ -2,7 +2,7 @@
     x:Class="M9AWPF.View.TaskEditView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:control="clr-namespace:M9AWPF.CustomControls"
+    xmlns:cc="clr-namespace:M9AWPF.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:M9AWPF.View"
@@ -71,8 +71,6 @@
                 LineStrokeThickness="2"
                 Orientation="Vertical" />
         </Grid>
-        <Border Grid.Column="2">
-            <control:TaskOverview TaskSource="{Binding AllMAATasks}" />
-        </Border>
+        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding AllMAATasks}" />
     </Grid>
 </UserControl>

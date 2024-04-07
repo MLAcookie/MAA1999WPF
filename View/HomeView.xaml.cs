@@ -14,16 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace M9AWPF.View
+namespace M9AWPF.View;
+
+/// <summary>
+/// HomeView.xaml 的交互逻辑
+/// </summary>
+public partial class HomeView : UserControl
 {
-    /// <summary>
-    /// HomeView.xaml 的交互逻辑
-    /// </summary>
-    public partial class HomeView : UserControl
+    public HomeView()
     {
-        public HomeView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

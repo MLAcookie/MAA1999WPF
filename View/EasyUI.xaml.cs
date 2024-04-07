@@ -38,7 +38,7 @@ namespace M9AWPF.View
         /// <param name="e"></param>
         private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var boxedMAATask = ((sender as MenuItem)!.DataContext as BoxedMAATask)!;
+            var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
             var tasks = EasyUIViewModel.AllMAATasks.ToList();
             for (int i = 0; i < tasks.Count; i++)
             {
@@ -62,7 +62,7 @@ namespace M9AWPF.View
         /// <param name="e"></param>
         private void MoveDown_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var boxedMAATask = ((sender as MenuItem)!.DataContext as BoxedMAATask)!;
+            var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
             var tasks = EasyUIViewModel.AllMAATasks.ToList();
             for (int i = 0; i < tasks.Count; i++)
             {
@@ -88,7 +88,7 @@ namespace M9AWPF.View
         /// <param name="e"></param>
         private void MoveUp_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var boxedMAATask = ((sender as MenuItem)!.DataContext as BoxedMAATask)!;
+            var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
             var tasks = EasyUIViewModel.AllMAATasks.ToList();
             for (int i = 0; i < tasks.Count; i++)
             {
@@ -147,7 +147,7 @@ namespace M9AWPF.View
         private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             // 找到目前的任务内容，构建任务对象
-            var task = new BoxedMAATask();
+            var task = new MAATaskViewModel();
 
             // 获取任务名称
             var combobox = (FindName("ComboBox_TaskName") as ComboBox)!;
@@ -159,10 +159,10 @@ namespace M9AWPF.View
             var stackPanel = (FindName("StackPanel_TaskSettings") as StackPanel)!;
             foreach (OptionTemplate opt in stackPanel.Children)
             {
-                if (opt.LocalComboBox.SelectedValue == null)
+                if (opt.SelectedValue == null)
                     return;
                 string optionName = opt.OptionName;
-                string optionVal = opt.LocalComboBox.SelectedValue.ToString()!;
+                string optionVal = opt.SelectedValue.ToString()!;
 
                 task.Options.Add(optionName);
                 task.OptionVals.Add(optionVal);

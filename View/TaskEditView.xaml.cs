@@ -1,8 +1,8 @@
-﻿using M9AWPF.CustomControls;
-using M9AWPF.ViewModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using M9AWPF.CustomControls;
+using M9AWPF.ViewModel;
 
 namespace M9AWPF.View;
 
@@ -27,10 +27,7 @@ public partial class TaskEditView : UserControl
 
         foreach (var option in options)
         {
-            var opt = new OptionTemplate(
-                option,
-                TaskEditViewModel.OptionMap2Values[option]
-            );
+            var opt = new OptionTemplate(option, TaskEditViewModel.OptionMap2Values[option]);
             TaskSettingPanel.Children.Add(opt);
         }
     }

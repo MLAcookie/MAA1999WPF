@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -8,36 +7,37 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace M9AWPF.CustomControls;
 
 public partial class DoubleViewContainer : UserControl
 {
     #region ViewTrue_propdp
-    public UserControl ViewTrue
+    public FrameworkElement ViewTrue
     {
-        get { return (UserControl)GetValue(ViewTrueProperty); }
+        get { return (FrameworkElement)GetValue(ViewTrueProperty); }
         set { SetValue(ViewTrueProperty, value); }
     }
 
     public static readonly DependencyProperty ViewTrueProperty = DependencyProperty.Register(
         "ViewTrue",
-        typeof(UserControl),
+        typeof(FrameworkElement),
         typeof(DoubleViewContainer),
         null
     );
     #endregion
 
     #region ViewFalse_propdp
-    public UserControl ViewFalse
+    public FrameworkElement ViewFalse
     {
-        get { return (UserControl)GetValue(ViewFalseProperty); }
+        get { return (FrameworkElement)GetValue(ViewFalseProperty); }
         set { SetValue(ViewFalseProperty, value); }
     }
 
     public static readonly DependencyProperty ViewFalseProperty = DependencyProperty.Register(
         "ViewFalse",
-        typeof(UserControl),
+        typeof(FrameworkElement),
         typeof(DoubleViewContainer),
         null
     );
@@ -47,10 +47,7 @@ public partial class DoubleViewContainer : UserControl
     public bool? IsViewTrue
     {
         get { return (bool?)GetValue(IsViewTrueProperty); }
-        set
-        {
-            SetValue(IsViewTrueProperty, value);
-        }
+        set { SetValue(IsViewTrueProperty, value); }
     }
 
     public static readonly DependencyProperty IsViewTrueProperty = DependencyProperty.Register(

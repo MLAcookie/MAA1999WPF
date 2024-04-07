@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,17 +20,36 @@ namespace M9AWPF.CustomControls
     /// <summary>
     /// 提供一个带标签的Combobox的模板
     /// </summary>
-    public partial class OptionTemplate : Border
+    public partial class OptionTemplate : ComboBox, INotifyPropertyChanged
     {
-        /// <summary>
-        /// 选项的名字
-        /// </summary>
-        public string OptionName { get; set; }
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        /// <summary>
-        /// 所有可能的选项
-        /// </summary>
-        public List<string> OptionValues { get; set; }
+        private void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        string optionName = "";
+        List<string> optionValues = new();
+
+        public string OptionName
+        {
+            get { return optionName; }
+            set
+            {
+                optionName = value;
+                OnPropertyChanged();
+            }
+        }
+        public List<string> OptionValues
+        {
+            get { return optionValues; }
+            set
+            {
+                optionValues = value;
+                OnPropertyChanged();
+            }
+        }
 
         public OptionTemplate(string optionName, List<string> optionValues)
         {
