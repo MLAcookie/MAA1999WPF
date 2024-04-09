@@ -15,47 +15,46 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace M9AWPF.CustomControls
+namespace M9AWPF.CustomControls;
+
+/// <summary>
+/// 提供一个带标签的Combobox的模板
+/// </summary>
+public partial class OptionTemplate : ComboBox, INotifyPropertyChanged
 {
-    /// <summary>
-    /// 提供一个带标签的Combobox的模板
-    /// </summary>
-    public partial class OptionTemplate : ComboBox, INotifyPropertyChanged
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged([CallerMemberName] string name = "")
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
 
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+    string optionName = "";
+    List<string> optionValues = new();
 
-        string optionName = "";
-        List<string> optionValues = new();
+    public string OptionName
+    {
+        get { return optionName; }
+        set
+        {
+            optionName = value;
+            OnPropertyChanged();
+        }
+    }
+    public List<string> OptionValues
+    {
+        get { return optionValues; }
+        set
+        {
+            optionValues = value;
+            OnPropertyChanged();
+        }
+    }
 
-        public string OptionName
-        {
-            get { return optionName; }
-            set
-            {
-                optionName = value;
-                OnPropertyChanged();
-            }
-        }
-        public List<string> OptionValues
-        {
-            get { return optionValues; }
-            set
-            {
-                optionValues = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public OptionTemplate(string optionName, List<string> optionValues)
-        {
-            InitializeComponent();
-            OptionName = optionName;
-            OptionValues = optionValues;
-        }
+    public OptionTemplate(string optionName, List<string> optionValues)
+    {
+        InitializeComponent();
+        OptionName = optionName;
+        OptionValues = optionValues;
     }
 }

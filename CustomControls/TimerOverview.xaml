@@ -54,16 +54,6 @@
                         <!--  =====================  -->
                         <Border.ContextMenu>
                             <ContextMenu Width="150" Visibility="{Binding Source={StaticResource BoolProxy}, Path=Data, Converter={StaticResource Boolean2VisibilityConverter}}">
-                                <MenuItem Click="MoveUp_MenuItem_Click" Header="MoveUp">
-                                    <MenuItem.Icon>
-                                        <TextBlock FontFamily="/M9AWPF;component/Font/#Font Awesome 6 Free Solid" Text="&#xf062;" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Click="MoveDown_MenuItem_Click" Header="MoveDown">
-                                    <MenuItem.Icon>
-                                        <TextBlock FontFamily="/M9AWPF;component/Font/#Font Awesome 6 Free Solid" Text="&#xf063;" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
                                 <MenuItem Click="Delete_MenuItem_Click" Header="Delete">
                                     <MenuItem.Icon>
                                         <TextBlock FontFamily="/M9AWPF;component/Font/#Font Awesome 6 Free Solid" Text="&#xf2ed;" />

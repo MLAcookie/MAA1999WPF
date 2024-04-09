@@ -70,69 +70,11 @@ public partial class TimerOverview : Border
 
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
-        {
-            if (tasks[i].Name == boxedMAATask.Name)
-            {
-                tasks.RemoveAt(i);
-                break;
-            }
-        }
 
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
     }
 
-    /// <summary>
-    /// 右键菜单下移某个item
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void MoveDown_MenuItem_Click(object sender, RoutedEventArgs e)
+    public void ItemsRefresh()
     {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
-        {
-            if (tasks[i].Name == boxedMAATask.Name)
-            {
-                if (i == tasks.Count - 1)
-                    return;
-                (tasks[i], tasks[i + 1]) = (tasks[i + 1], tasks[i]);
-                break;
-            }
-        }
-
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
-    }
-
-    /// <summary>
-    /// 右键菜单上移某个item
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void MoveUp_MenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
-        {
-            if (tasks[i].Name == boxedMAATask.Name)
-            {
-                if (i == 0)
-                    return;
-                (tasks[i], tasks[i - 1]) = (tasks[i - 1], tasks[i]);
-                break;
-            }
-        }
-
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
+        TaskList_ItemControl.Items.Clear();
     }
 }

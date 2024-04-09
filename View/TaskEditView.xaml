@@ -23,20 +23,34 @@
         </Grid.ColumnDefinitions>
         <StackPanel Margin="5">
             <ComboBox
+                Name="ChooseConfig_ComboBox"
                 Margin="5"
                 hc:InfoElement.Placeholder="Choose Config File"
                 hc:TitleElement.Title="Config File:"
                 hc:TitleElement.TitlePlacement="Left"
                 hc:TitleElement.TitleWidth="100"
+                ItemsSource="{Binding AllConfigFiles}"
+                SelectedIndex="{Binding ConfigFileIndex}"
                 Style="{StaticResource ComboBoxExtend}" />
             <StackPanel Margin="5" Orientation="Horizontal">
                 <Button
+                    Name="NewConfigButton"
                     Width="60"
                     Margin="5,0"
+                    Click="NewConfigButton_Click"
                     Content="New" />
+                <Popup
+                    x:Name="NewConfigPopup"
+                    AllowsTransparency="True"
+                    PlacementTarget="{Binding ElementName=NewConfigButton}"
+                    StaysOpen="False">
+                    <cc:NewConfigPopup />
+                </Popup>
                 <Button
                     Width="60"
                     Margin="5,0"
+                    Command="{Binding DeleteConfigCommand}"
+                    CommandParameter="{Binding ElementName=ChooseConfig_ComboBox, Path=SelectedIndex}"
                     Content="Delete" />
             </StackPanel>
             <hc:Divider
@@ -57,6 +71,7 @@
                 Width="60"
                 Margin="10,5"
                 HorizontalAlignment="Left"
+                Click="AddTaskButton_Click"
                 Content="Add" />
         </StackPanel>
         <Grid Grid.Column="1">
@@ -71,6 +86,6 @@
                 LineStrokeThickness="2"
                 Orientation="Vertical" />
         </Grid>
-        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding AllMAATasks}" />
+        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding TestTasks}" />
     </Grid>
 </UserControl>

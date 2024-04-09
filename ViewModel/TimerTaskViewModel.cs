@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace M9AWPF.ViewModel;
-
 public class TimerTaskViewModel
 {
     public string Time { get; set; } = string.Empty;

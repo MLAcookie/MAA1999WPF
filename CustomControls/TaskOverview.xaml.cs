@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using M9AWPF.ViewModel;
@@ -42,97 +44,61 @@ public partial class TaskOverview : Border
         );
     #endregion
 
-    List<MAATaskViewModel> testTasks =
-    [
-        new MAATaskViewModel
-        {
-            Name = "Test1",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        },
-        new MAATaskViewModel
-        {
-            Name = "Test2",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        }
-    ];
-
-    public List<MAATaskViewModel> TestTasks
-    {
-        get { return testTasks; }
-    }
-
     public TaskOverview()
     {
         InitializeComponent();
     }
 
+    #region ClickEvents
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        for (int i = 0; i < TaskSource.Count; i++)
         {
-            if (tasks[i].Name == boxedMAATask.Name)
+            if (TaskSource[i] == selectM9ATask)
             {
-                tasks.RemoveAt(i);
+                TaskSource.RemoveAt(i);
                 break;
             }
         }
-
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
+        ItemsRefresh();
     }
 
-    /// <summary>
-    /// 右键菜单下移某个item
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void MoveDown_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        for (int i = 0; i < TaskSource.Count; i++)
         {
-            if (tasks[i].Name == boxedMAATask.Name)
+            if (TaskSource[i] == selectM9ATask)
             {
-                if (i == tasks.Count - 1)
+                if (i == TaskSource.Count - 1)
                     return;
-                (tasks[i], tasks[i + 1]) = (tasks[i + 1], tasks[i]);
+                (TaskSource[i], TaskSource[i + 1]) = (TaskSource[i + 1], TaskSource[i]);
                 break;
             }
         }
-
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
+        ItemsRefresh();
     }
 
-    /// <summary>
-    /// 右键菜单上移某个item
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void MoveUp_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var boxedMAATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
-        var tasks = TaskEditViewModel.AllMAATasks.ToList();
-        for (int i = 0; i < tasks.Count; i++)
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        for (int i = 0; i < TaskSource.Count; i++)
         {
-            if (tasks[i].Name == boxedMAATask.Name)
+            if (TaskSource[i] == selectM9ATask)
             {
                 if (i == 0)
                     return;
-                (tasks[i], tasks[i - 1]) = (tasks[i - 1], tasks[i]);
+                (TaskSource[i], TaskSource[i - 1]) = (TaskSource[i - 1], TaskSource[i]);
                 break;
             }
         }
+        ItemsRefresh();
+    }
+    #endregion
 
-        TaskEditViewModel.AllMAATasks = tasks;
-        var itemsControl = (FindName("TaskList_ItemControl") as ItemsControl)!;
-        itemsControl.ItemsSource = tasks;
+    public void ItemsRefresh()
+    {
+        TaskList_ItemControl.Items.Refresh();
     }
 }

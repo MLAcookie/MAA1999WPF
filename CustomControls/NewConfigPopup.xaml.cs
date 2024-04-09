@@ -13,16 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace M9AWPF.View;
-
-/// <summary>
-/// SettingView.xaml 的交互逻辑
-/// </summary>
-public partial class SettingView : UserControl
+namespace M9AWPF.CustomControls
 {
-
-    public SettingView()
+    /// <summary>
+    /// NewConfigDialog.xaml 的交互逻辑
+    /// </summary>
+    public partial class NewConfigPopup : Border
     {
-        InitializeComponent();
+        public NewConfigPopup()
+        {
+            InitializeComponent();
+        }
     }
 }

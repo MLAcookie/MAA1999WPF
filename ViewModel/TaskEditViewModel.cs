@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using M9AWPF.JsonSerializeObject;
 using M9AWPF.Model;
 
@@ -9,6 +10,23 @@ namespace M9AWPF.ViewModel;
 
 public partial class TaskEditViewModel : ObservableObject
 {
+    [ObservableProperty]
+    List<MAATaskViewModel> testTasks =
+    [
+        new MAATaskViewModel
+        {
+            Name = "Test1",
+            Options = { "测试一", "测试二" },
+            OptionVals = { "1", "2" },
+        },
+        new MAATaskViewModel
+        {
+            Name = "Test2",
+            Options = { "测试一", "测试二" },
+            OptionVals = { "1", "2" },
+        }
+    ];
+
     public static Dictionary<string, List<string>> TaskMap2Option
     {
         get
@@ -39,31 +57,35 @@ public partial class TaskEditViewModel : ObservableObject
         }
     }
 
-    public static List<MAATaskViewModel> AllMAATasks
-    {
-        get
-        {
-            var res = new List<MAATaskViewModel>();
-            foreach (var item in ConfigManager.AllMAATasks)
-            {
-                var boxedMAATask = MAATaskViewModel.FromMAATask(item);
-                res.Add(boxedMAATask);
-            }
-            return res;
-        }
-        set
-        {
-            var res = new List<M9AConfigObject.Task>();
-            foreach (var item in value)
-            {
-                res.Add(item.ToMAATask());
-            }
-            ConfigManager.AllMAATasks = res.ToArray();
-        }
-    }
-
+    #region ObservableProperties
     [ObservableProperty]
     static List<string> allTaskTypes = ConfigInterface
         .TaskTypes.Select((m9aTask) => m9aTask.name)
         .ToList();
+
+    [ObservableProperty]
+    static List<string> allConfigFiles = new();
+
+    [ObservableProperty]
+    int configFileIndex;
+
+    [ObservableProperty]
+    List<MAATaskViewModel> allMAATasks = new();
+    #endregion
+
+    #region Commands
+    [RelayCommand]
+    void NewConfig()
+    {
+
+    }
+
+    [RelayCommand]
+    void DeleteConfig(int index)
+    {
+
+    }
+    #endregion
+
+
 }
