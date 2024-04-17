@@ -44,7 +44,26 @@
                     AllowsTransparency="True"
                     PlacementTarget="{Binding ElementName=NewConfigButton}"
                     StaysOpen="False">
-                    <cc:NewConfigPopup />
+                    <Border
+                        Margin="5"
+                        Background="WhiteSmoke"
+                        BorderBrush="LightGray"
+                        BorderThickness="2"
+                        CornerRadius="10">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBox
+                                Name="NewConfigTextBox"
+                                Width="150"
+                                Margin="5"
+                                hc:InfoElement.Placeholder="New Config Name"
+                                Style="{StaticResource TextBoxExtend}" />
+                            <Button
+                                Margin="5"
+                                Command="{Binding NewConfigCommand}"
+                                CommandParameter="{Binding ElementName=NewConfigTextBox, Path=Text}"
+                                Content="Add" />
+                        </StackPanel>
+                    </Border>
                 </Popup>
                 <Button
                     Width="60"
@@ -86,6 +105,6 @@
                 LineStrokeThickness="2"
                 Orientation="Vertical" />
         </Grid>
-        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding TestTasks}" />
+        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding M9aTasks}" />
     </Grid>
 </UserControl>

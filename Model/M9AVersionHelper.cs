@@ -41,15 +41,12 @@ namespace M9AWPF.Model
             }
         }
 
-        /// <summary>
-        /// 获取最新release的版本号
-        /// </summary>
         public static string LatestReleaseVersion
         {
             get { return latestRelease.tag_name; }
         }
 
-        public M9AVersionHelper()
+        static M9AVersionHelper()
         {
             //加入浏览器UA，防止github阻止访问
             client.DefaultRequestHeaders.Add(
@@ -59,9 +56,8 @@ namespace M9AWPF.Model
             Init();
         }
 
-        /// <summary>
-        /// 初始化内置的Release对象，防止多次使用API后被Github限制
-        /// </summary>
+        public M9AVersionHelper() { }
+
         private static void Init()
         {
             //新建http请求
@@ -84,18 +80,11 @@ namespace M9AWPF.Model
             }
         }
 
-        /// <summary>
-        /// 判断当前使用的M9A是否为最新版
-        /// </summary>
-        /// <returns></returns>
         public static bool IsLatestVersion()
         {
             return latestRelease?.tag_name == ConfigInterface.M9AVersion;
         }
 
-        /// <summary>
-        /// 获取最新的M9ARelease，下载到temp目录中
-        /// </summary>
         public static async Task GetLatestM9ARelase()
         {
             //文件夹路径检查
@@ -131,7 +120,7 @@ namespace M9AWPF.Model
             }
         }
 
-        public static void CloseUpdate(object? sender, CancelEventArgs e)
+        public static void OnWindowsClose(object? sender, CancelEventArgs e)
         {
             //检查有无下载，下载过就执行更新
             if (HasDownloaded)
@@ -162,6 +151,7 @@ namespace M9AWPF.Model
             );
         }
 
+        #region FileAuxMethods
         private static void CleanPath(string path)
         {
             if (Directory.Exists(path))
@@ -182,5 +172,6 @@ namespace M9AWPF.Model
             string fileName = Path.GetFileName(sourceFile);
             File.Move(sourceFile, Path.Combine(path, fileName));
         }
+        #endregion
     }
 }

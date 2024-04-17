@@ -14,14 +14,14 @@ namespace M9AWPF.CustomControls;
 public partial class TaskOverview : Border
 {
     #region TaskSource_propdp
-    public List<MAATaskViewModel> TaskSource
+    public List<M9ATaskViewModel> TaskSource
     {
-        get { return (List<MAATaskViewModel>)GetValue(TaskSourceProperty); }
+        get { return (List<M9ATaskViewModel>)GetValue(TaskSourceProperty); }
         set { SetValue(TaskSourceProperty, value); }
     }
     public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
         "TaskSource",
-        typeof(List<MAATaskViewModel>),
+        typeof(List<M9ATaskViewModel>),
         typeof(TaskOverview),
         null
     );
@@ -52,7 +52,7 @@ public partial class TaskOverview : Border
     #region ClickEvents
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
         for (int i = 0; i < TaskSource.Count; i++)
         {
             if (TaskSource[i] == selectM9ATask)
@@ -66,7 +66,7 @@ public partial class TaskOverview : Border
 
     private void MoveDown_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
         for (int i = 0; i < TaskSource.Count; i++)
         {
             if (TaskSource[i] == selectM9ATask)
@@ -82,7 +82,7 @@ public partial class TaskOverview : Border
 
     private void MoveUp_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var selectM9ATask = ((sender as MenuItem)!.DataContext as MAATaskViewModel)!;
+        var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
         for (int i = 0; i < TaskSource.Count; i++)
         {
             if (TaskSource[i] == selectM9ATask)

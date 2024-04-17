@@ -20,13 +20,18 @@ namespace M9AWPF.View;
 /// </summary>
 public partial class TaskEditView : UserControl
 {
+    [DllImport("user32")]
+    public static extern IntPtr SetFocus(IntPtr hWnd);
+
     TaskEditViewModel viewModel;
+
     public TaskEditView()
     {
         InitializeComponent();
         viewModel = (DataContext as TaskEditViewModel)!;
     }
 
+    #region Events
     private void TaskTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         TaskSettingPanel.Children.Clear();
@@ -45,11 +50,16 @@ public partial class TaskEditView : UserControl
 
     private void AddTaskButton_Click(object sender, RoutedEventArgs e)
     {
-
+        if (TaskSettingPanel.Children.Count != 0)
+        {
+            var comboBoxes = TaskSettingPanel.Children;
+            foreach (OptionTemplate box in comboBoxes)
+            {
+                string option = box.OptionName;
+                string optionVal = (box.SelectedValue as string)!;
+            }
+        }
     }
-
-    [DllImport("user32")]
-    public static extern IntPtr SetFocus(IntPtr hWnd);
 
     private async void NewConfigButton_Click(object sender, RoutedEventArgs e)
     {
@@ -61,4 +71,5 @@ public partial class TaskEditView : UserControl
         var source = (HwndSource)PresentationSource.FromVisual(NewConfigPopup.Child);
         SetFocus(source.Handle);
     }
+    #endregion
 }

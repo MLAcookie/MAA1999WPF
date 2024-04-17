@@ -31,7 +31,6 @@
                     Width="80"
                     Height="50"
                     Command="{Binding StartM9ACommand}"
-                    CommandParameter="{Binding ElementName=SelectConfig_ComboBox, Path=SelectedIndex}"
                     Content="Start"
                     FontSize="24" />
                 <Grid Width="300" Margin="10">
@@ -54,6 +53,7 @@
                     hc:TitleElement.TitlePlacement="Left"
                     hc:TitleElement.TitleWidth="100"
                     ItemsSource="{Binding Configs}"
+                    SelectedIndex="{Binding ConfigIndex}"
                     Style="{StaticResource ComboBoxExtend}"
                     Visibility="{Binding ElementName=UseTimerButton, Path=IsChecked, Converter={StaticResource Boolean2VisibilityReConverter}}" />
             </StackPanel>

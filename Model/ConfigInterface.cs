@@ -1,11 +1,11 @@
-﻿using M9AWPF.Constants;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using M9AWPF.Constants;
 
 namespace M9AWPF.Model;
 
@@ -17,9 +17,9 @@ public static class ConfigInterface
     private static readonly string path = ConfKeys.M9AInterface;
 
     /// <summary>
-	/// option及其所对应的能取的值
-	/// </summary>
-	public static readonly Dictionary<string, List<string>> option = new();
+    /// option及其所对应的能取的值
+    /// </summary>
+    public static readonly Dictionary<string, List<string>> option = new();
     public static string M9AVersion { get; }
 
     /// <summary>
@@ -38,10 +38,11 @@ public static class ConfigInterface
         public List<string> option = new();
     }
 
-    /// <summary>
-    /// 指示任务，具体内容见Task
-    /// </summary>
-    public static readonly List<M9ATaskType> TaskTypes = new();
+    static readonly List<M9ATaskType> taskTypes = new();
+    public static List<M9ATaskType> TaskTypes
+    {
+        get { return taskTypes; }
+    }
 
     /// <summary>
     /// 指示玩的是哪个服的游戏
@@ -71,10 +72,7 @@ public static class ConfigInterface
         var tasks = json["task"]!.AsArray();
         foreach (var item in tasks)
         {
-            var task_new = new M9ATaskType()
-            {
-                name = item!["name"]!.ToString(),
-            };
+            var task_new = new M9ATaskType() { name = item!["name"]!.ToString(), };
 
             var option = item!["option"];
             if (option != null)
@@ -82,12 +80,13 @@ public static class ConfigInterface
                 var tmp = option.AsArray();
                 foreach (var tmp_it in tmp)
                 {
-                    if (tmp_it == null) continue;
+                    if (tmp_it == null)
+                        continue;
                     task_new.option.Add(tmp_it!.ToString());
                 }
             }
 
-            TaskTypes.Add(task_new);
+            taskTypes.Add(task_new);
         }
 
         // 获取所有服务器

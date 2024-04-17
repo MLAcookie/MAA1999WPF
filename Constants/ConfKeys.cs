@@ -33,8 +33,4 @@ public static class ConfKeys
 
     // UI生成的config文件
     public static readonly string UIManagedConfig = "./config";
-
-    // Timer的配置文件
-    public static readonly string TimerConfig = "./TimerConfig.json";
-
 }

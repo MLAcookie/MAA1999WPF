@@ -98,14 +98,14 @@ public class EasyUIViewModel : ObservableObject
     /// <summary>
     /// 所有任务
     /// </summary>
-    public static MAATaskViewModel[] AllMAATasks
+    public static M9ATaskViewModel[] AllMAATasks
     {
         get
         {
-            var res = new List<MAATaskViewModel>();
+            var res = new List<M9ATaskViewModel>();
             foreach (var item in ConfigManager.AllMAATasks)
             {
-                var boxedMAATask = MAATaskViewModel.FromMAATask(item);
+                var boxedMAATask = M9ATaskViewModel.FromMAATask(item);
                 res.Add(boxedMAATask);
             }
             return res.ToArray();
@@ -153,7 +153,7 @@ public class EasyUIViewModel : ObservableObject
     /// append task to the tail of ALLMAATasks
     /// </summary>
     /// <param name="task"></param>
-    public static void AppendTask(MAATaskViewModel task)
+    public static void AppendTask(M9ATaskViewModel task)
     {
         var res = AllMAATasks.ToList();
         res.Add(task);
@@ -163,7 +163,7 @@ public class EasyUIViewModel : ObservableObject
     /// <summary>
     /// 用于启动MAA CLI跑任务
     /// </summary>
-    private readonly ConsoleBehavior consoleBehavior = new();
+    private readonly ConsoleBehavior consoleBehavior;
 
     // 一些命令操作
     public RelayCommand StartM9ACommand { get; set; }

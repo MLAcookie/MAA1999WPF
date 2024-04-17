@@ -32,8 +32,7 @@
                                     Margin="15,10,0,3"
                                     FontSize="14"
                                     FontWeight="Black"
-                                    Text="{Binding Name}"
-                                    Visibility="Visible" />
+                                    Text="{Binding Name}" />
                             </Grid>
                             <Separator Margin="5" Background="Gray" />
                             <!--  用来展示任务选项的部分  -->

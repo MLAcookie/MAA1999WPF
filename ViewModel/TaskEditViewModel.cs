@@ -10,22 +10,7 @@ namespace M9AWPF.ViewModel;
 
 public partial class TaskEditViewModel : ObservableObject
 {
-    [ObservableProperty]
-    List<MAATaskViewModel> testTasks =
-    [
-        new MAATaskViewModel
-        {
-            Name = "Test1",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        },
-        new MAATaskViewModel
-        {
-            Name = "Test2",
-            Options = { "测试一", "测试二" },
-            OptionVals = { "1", "2" },
-        }
-    ];
+    M9AConfig currentConfig;
 
     public static Dictionary<string, List<string>> TaskMap2Option
     {
@@ -64,27 +49,21 @@ public partial class TaskEditViewModel : ObservableObject
         .ToList();
 
     [ObservableProperty]
-    static List<string> allConfigFiles = new();
+    static List<string> configFiles = new();
 
     [ObservableProperty]
     int configFileIndex;
 
     [ObservableProperty]
-    List<MAATaskViewModel> allMAATasks = new();
+    List<M9ATaskViewModel> m9aTasks = new();
     #endregion
 
     #region Commands
     [RelayCommand]
-    void NewConfig()
-    {
-
-    }
+    void NewConfig(string newConfigName) { }
 
     [RelayCommand]
-    void DeleteConfig(int index)
-    {
-
-    }
+    void DeleteConfig(int index) { }
     #endregion
 
 

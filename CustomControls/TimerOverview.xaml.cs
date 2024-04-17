@@ -22,14 +22,14 @@ namespace M9AWPF.CustomControls;
 public partial class TimerOverview : Border
 {
     #region TaskSource_propdp
-    public List<MAATaskViewModel> TaskSource
+    public List<TimerTaskViewModel> TaskSource
     {
-        get { return (List<MAATaskViewModel>)GetValue(TaskSourceProperty); }
+        get { return (List<TimerTaskViewModel>)GetValue(TaskSourceProperty); }
         set { SetValue(TaskSourceProperty, value); }
     }
     public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
         "TaskSource",
-        typeof(List<MAATaskViewModel>),
+        typeof(List<TimerTaskViewModel>),
         typeof(TimerOverview),
         null
     );
@@ -68,10 +68,21 @@ public partial class TimerOverview : Border
         InitializeComponent();
     }
 
+    #region ClickEvents
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
-
+        var selectTimerTask = ((sender as MenuItem)!.DataContext as TimerTaskViewModel)!;
+        for (int i = 0; i < TaskSource.Count; i++)
+        {
+            if (TaskSource[i] == selectTimerTask)
+            {
+                TaskSource.RemoveAt(i);
+                break;
+            }
+        }
+        ItemsRefresh();
     }
+    #endregion
 
     public void ItemsRefresh()
     {

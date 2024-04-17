@@ -1,11 +1,29 @@
 ﻿using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using M9AWPF.Model;
 
 namespace M9AWPF.ViewModel;
 
 public partial class HomeViewModel : ObservableObject
 {
+    M9AConfig currentConfig;
+
+    #region Properties
+    int configIndex = -1;
+    public int ConfigIndex
+    {
+        get { return configIndex; }
+        set
+        {
+            configIndex = value;
+            currentConfig = M9AConfigManager.NameToObject[Configs[value]];
+            ConfigTasks = M9ATaskViewModel.GetTaskVMFromConfig(currentConfig);
+            M9AConfigManager.IsConfigChanged[Configs[value]] = true;
+        }
+    }
+    #endregion
+
     #region AutoProperties
     public string M9AVersion
     {
@@ -19,12 +37,17 @@ public partial class HomeViewModel : ObservableObject
 
     #region ObservableProperties
     [ObservableProperty]
-    List<string> configs;
+    List<string> configs = M9AConfigManager.ConfigNames;
 
     [ObservableProperty]
-    List<string> configTasks;
+    List<M9ATaskViewModel> configTasks;
     #endregion
 
+    public HomeViewModel() { }
+
     [RelayCommand]
-    public void StartM9A(int index) { }
+    public void StartM9A()
+    {
+        ConsoleBehavior.Instance.Start();
+    }
 }
