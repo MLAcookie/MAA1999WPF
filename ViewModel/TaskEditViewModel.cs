@@ -58,13 +58,55 @@ public partial class TaskEditViewModel : ObservableObject
     List<M9ATaskViewModel> m9aTasks = new();
     #endregion
 
+    public void NewConfig(string newConfigName)
+    {
+        if (newConfigName == "")
+        {
+            return;
+        }
+        if (currentConfig is not null)
+        {
+            SaveCurrentConfig();
+        }
+        M9AConfig temp = M9AConfigManager.NewConfig(newConfigName);
+        ConfigFiles.Add(temp.ConfigName);
+        M9aTasks.Clear();
+        ConfigFileIndex = ConfigFiles.Count - 1;
+        currentConfig = temp;
+    }
+
+    public void AddTask(string TypeName, List<string>? options = null, List<string>? values = null)
+    {
+        if (currentConfig is null)
+        {
+            return;
+        }
+        M9ATaskViewModel task = new() { Name = TypeName };
+        if (options is not null)
+        {
+            task.Options = options;
+            task.OptionVals = values;
+        }
+        M9aTasks.Add(task);
+    }
+
     #region Commands
     [RelayCommand]
-    void NewConfig(string newConfigName) { }
-
-    [RelayCommand]
-    void DeleteConfig(int index) { }
+    void DeleteConfig(int index)
+    {
+        string temp = ConfigFiles[index];
+        configFiles.RemoveAt(index);
+        M9AConfigManager.DeleteConfig(temp);
+    }
     #endregion
 
-
+    public async void SaveCurrentConfig()
+    {
+        currentConfig.Tasks.Clear();
+        foreach (var task in M9aTasks)
+        {
+            currentConfig.Tasks.Add(M9ATaskViewModel.ConvertToTask(task));
+        }
+        await currentConfig.SaveConfig();
+    }
 }

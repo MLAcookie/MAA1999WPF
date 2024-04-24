@@ -8,6 +8,7 @@ using M9AWPF.Constants;
 
 namespace M9AWPF.Model;
 
+// 已改用单例模式
 public class ConsoleBehavior
 {
     static readonly string M9A_PATH = ConfKeys.M9ABin;

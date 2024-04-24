@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -50,15 +51,32 @@ public partial class TaskEditView : UserControl
 
     private void AddTaskButton_Click(object sender, RoutedEventArgs e)
     {
+        string typeName = (ChooseTaskType_ComboBox.SelectedValue as string)!;
+        if (typeName == "")
+        {
+            return;
+        }
         if (TaskSettingPanel.Children.Count != 0)
         {
+            List<string> options = new();
+            List<string> values = new();
             var comboBoxes = TaskSettingPanel.Children;
             foreach (OptionTemplate box in comboBoxes)
             {
-                string option = box.OptionName;
-                string optionVal = (box.SelectedValue as string)!;
+                options.Add(box.OptionName);
+                if (box.SelectedValue as string is null)
+                {
+                    return;
+                }
+                values.Add((box.SelectedValue as string)!);
             }
+            viewModel.AddTask(typeName, options, values);
         }
+        else
+        {
+            viewModel.AddTask(typeName);
+        }
+        LocalTaskOverview.ItemsRefresh();
     }
 
     private async void NewConfigButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +88,19 @@ public partial class TaskEditView : UserControl
         await Task.Yield();
         var source = (HwndSource)PresentationSource.FromVisual(NewConfigPopup.Child);
         SetFocus(source.Handle);
+    }
+
+    private void ChooseConfig_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        LocalTaskOverview.ItemsRefresh();
+        ChooseConfig_ComboBox.Items.Refresh();
+    }
+
+    private void NewConfigConfirmButton_Click(object sender, RoutedEventArgs e)
+    {
+        viewModel.NewConfig(NewConfigTextBox.Text);
+        ChooseConfig_ComboBox.Items.Refresh();
+        NewConfigPopup.IsOpen = false;
     }
     #endregion
 }

@@ -29,8 +29,9 @@
                 hc:TitleElement.Title="Config File:"
                 hc:TitleElement.TitlePlacement="Left"
                 hc:TitleElement.TitleWidth="100"
-                ItemsSource="{Binding AllConfigFiles}"
-                SelectedIndex="{Binding ConfigFileIndex}"
+                ItemsSource="{Binding ConfigFiles}"
+                SelectedIndex="{Binding ConfigFileIndex, UpdateSourceTrigger=PropertyChanged}"
+                SelectionChanged="ChooseConfig_ComboBox_SelectionChanged"
                 Style="{StaticResource ComboBoxExtend}" />
             <StackPanel Margin="5" Orientation="Horizontal">
                 <Button
@@ -58,9 +59,9 @@
                                 hc:InfoElement.Placeholder="New Config Name"
                                 Style="{StaticResource TextBoxExtend}" />
                             <Button
+                                Name="NewConfigConfirmButton"
                                 Margin="5"
-                                Command="{Binding NewConfigCommand}"
-                                CommandParameter="{Binding ElementName=NewConfigTextBox, Path=Text}"
+                                Click="NewConfigConfirmButton_Click"
                                 Content="Add" />
                         </StackPanel>
                     </Border>
@@ -77,6 +78,7 @@
                 LineStroke="LightGray"
                 LineStrokeThickness="2" />
             <ComboBox
+                Name="ChooseTaskType_ComboBox"
                 Margin="5"
                 hc:InfoElement.Placeholder="Choose Task Type"
                 hc:TitleElement.Title="Task Type:"
@@ -105,6 +107,9 @@
                 LineStrokeThickness="2"
                 Orientation="Vertical" />
         </Grid>
-        <cc:TaskOverview Grid.Column="2" TaskSource="{Binding M9aTasks}" />
+        <cc:TaskOverview
+            x:Name="LocalTaskOverview"
+            Grid.Column="2"
+            TaskSource="{Binding M9aTasks}" />
     </Grid>
 </UserControl>

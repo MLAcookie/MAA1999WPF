@@ -18,7 +18,7 @@ namespace M9AWPF.ViewModel;
 /// </summary>
 public class M9ATaskViewModel
 {
-    public static M9AConfigObject.Task ConvrtToTask(M9ATaskViewModel viewModel)
+    public static M9AConfigObject.Task ConvertToTask(M9ATaskViewModel viewModel)
     {
         M9AConfigObject.Task task = new();
         for (int i = 0; i < viewModel.Options.Count; i++)

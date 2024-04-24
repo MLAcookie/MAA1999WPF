@@ -37,23 +37,30 @@ public static class M9AConfigManager
 
     static M9AConfigManager()
     {
-        string[] allConfigPath = Directory.GetFiles(ConfigPath);
-        foreach (string filePath in allConfigPath)
+        if (Directory.Exists(ConfigPath))
         {
-            M9AConfig temp = new(filePath);
-            nameToPath.Add(Path.GetFileName(filePath), filePath);
-            nameToObject.Add(Path.GetFileName(filePath), temp);
-            IsConfigChanged.Add(Path.GetFileName(filePath), false);
+            string[] allConfigPath = Directory.GetFiles(ConfigPath);
+            foreach (string filePath in allConfigPath)
+            {
+                M9AConfig temp = new(filePath);
+                nameToPath.Add(Path.GetFileName(filePath), filePath);
+                nameToObject.Add(Path.GetFileName(filePath), temp);
+                IsConfigChanged.Add(Path.GetFileName(filePath), false);
+            }
+        }
+        else
+        {
+            Directory.CreateDirectory(ConfigPath);
         }
     }
 
-    public static void SaveAllConfig()
+    public static async Task SaveAllConfig()
     {
         foreach (var config in IsConfigChanged)
         {
             if (config.Value)
             {
-                NameToObject[config.Key].SaveConfig();
+                await NameToObject[config.Key].SaveConfig();
             }
         }
     }
@@ -71,6 +78,8 @@ public static class M9AConfigManager
         IsConfigChanged[name] = true;
         return newConfig;
     }
+    public static void DeleteConfig(string name)
+    {
 
-    public static void SwichConfig(string name) { }
+    }
 }
