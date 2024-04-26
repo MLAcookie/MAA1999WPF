@@ -1,19 +1,8 @@
-﻿using System;
+﻿using M9AWPF.ViewModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using M9AWPF.ViewModel;
 
 namespace M9AWPF.CustomControls;
 
@@ -22,21 +11,42 @@ namespace M9AWPF.CustomControls;
 /// </summary>
 public partial class TimerOverview : Border
 {
+    #region CurrentTimer_propdp
+
+    public TimerViewModel CurrentTimer
+    {
+        get { return (TimerViewModel)GetValue(CurrentTimerProperty); }
+        set { SetValue(CurrentTimerProperty, value); }
+    }
+
+    public static readonly DependencyProperty CurrentTimerProperty = DependencyProperty.Register(
+        "CurrentTimer",
+        typeof(TimerViewModel),
+        typeof(TimerOverview),
+        null
+    );
+
+    #endregion CurrentTimer_propdp
+
     #region TaskSource_propdp
+
     public Collection<TimerTaskViewModel> TaskSource
     {
         get { return (Collection<TimerTaskViewModel>)GetValue(TaskSourceProperty); }
         set { SetValue(TaskSourceProperty, value); }
     }
+
     public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
         "TaskSource",
         typeof(Collection<TimerTaskViewModel>),
         typeof(TimerOverview),
         null
     );
-    #endregion
+
+    #endregion TaskSource_propdp
 
     #region IsEnableContextMenu_propdp
+
     public bool IsEnableContextMenu
     {
         get { return (bool)GetValue(IsEnableContextMenuProperty); }
@@ -51,9 +61,10 @@ public partial class TimerOverview : Border
             typeof(TimerOverview),
             new PropertyMetadata(true)
         );
-    #endregion
 
-    List<TimerTaskViewModel> testTasks =
+    #endregion IsEnableContextMenu_propdp
+
+    private List<TimerTaskViewModel> testTasks =
     [
         new TimerTaskViewModel { Time = "09:10", File = "Test1.json" },
         new TimerTaskViewModel { Time = "09:20", File = "Test2.json" }
@@ -70,6 +81,7 @@ public partial class TimerOverview : Border
     }
 
     #region ClickEvents
+
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
         var selectTimerTask = ((sender as MenuItem)!.DataContext as TimerTaskViewModel)!;
@@ -83,7 +95,8 @@ public partial class TimerOverview : Border
         }
         ItemsRefresh();
     }
-    #endregion
+
+    #endregion ClickEvents
 
     public void ItemsRefresh()
     {

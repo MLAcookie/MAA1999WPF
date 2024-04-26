@@ -23,7 +23,7 @@
                     <Border
                         Margin="0,5,10,5"
                         Background="LightGray"
-                        CornerRadius="12">
+                        CornerRadius="8">
                         <Grid Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />

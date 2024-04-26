@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using M9AWPF.Model;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace M9AWPF.ViewModel;
 
@@ -68,8 +68,13 @@ public partial class M9AConfigViewModel : ObservableObject
         {
             M9aConfig.Tasks.Add(M9ATaskViewModel.ToTask(task));
         }
-        return Task.CompletedTask;
-        //return M9aConfig.SaveConfig();
+        //return Task.CompletedTask;
+        return M9aConfig.SaveConfig();
+    }
+
+    public void DeleteConfig()
+    {
+        M9AConfigManager.DeleteConfig(M9aConfig.ConfigName);
     }
 
     #endregion publicMethods

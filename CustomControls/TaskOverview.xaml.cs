@@ -102,5 +102,11 @@ public partial class TaskOverview : Border
 
     #endregion ClickEvents
 
+    #region PublicMethods
+
+    public void SaveItems() => CurrentM9AConfig.SaveConfig();
+
     public void ItemsRefresh() => TaskList_ItemControl.Items.Refresh();
+
+    #endregion PublicMethods
 }

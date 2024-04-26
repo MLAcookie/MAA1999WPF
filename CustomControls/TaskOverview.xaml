@@ -24,14 +24,14 @@
                     <Border
                         Margin="0,5,10,5"
                         Background="LightGray"
-                        CornerRadius="12">
+                        CornerRadius="8">
                         <StackPanel>
                             <Grid>
                                 <!--  任务名称  -->
                                 <TextBlock
                                     Margin="15,10,0,3"
                                     FontSize="14"
-                                    FontWeight="Black"
+                                    FontWeight="Heavy"
                                     Text="{Binding Name}" />
                             </Grid>
                             <Separator Margin="5" Background="Gray" />
@@ -43,7 +43,7 @@
                                 </Grid.ColumnDefinitions>
                                 <ItemsControl
                                     Grid.Column="0"
-                                    Margin="25,0,0,10"
+                                    Margin="20,0,0,10"
                                     ItemsSource="{Binding Options}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="sys:String">

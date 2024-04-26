@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using M9AWPF.Model;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace M9AWPF.ViewModel;
 
@@ -48,19 +48,19 @@ public partial class TaskEditViewModel : ObservableObject
         .ToList();
 
     [ObservableProperty]
-    private static ObservableCollection<string> configFiles = new();
+    private static ObservableCollection<string> configFiles = new(M9AConfigManager.ConfigNames);
 
     [ObservableProperty]
-    private int configFileIndex;
+    private int configFileIndex = -1;
 
     partial void OnConfigFileIndexChanged(int value)
     {
-        CurrentConfig.SaveConfig();
+        CurrentConfig?.SaveConfig();
         CurrentConfig = M9AConfigViewModel.GetVMFromString(ConfigFiles[value]);
     }
 
     [ObservableProperty]
-    private M9AConfigViewModel currentConfig;
+    private M9AConfigViewModel? currentConfig;
 
     #endregion ObservableProperties
 
@@ -81,11 +81,6 @@ public partial class TaskEditViewModel : ObservableObject
         CurrentConfig.AddTask(task);
     }
 
-    public async void SaveCurrentConfig()
-    {
-        await CurrentConfig.SaveConfig();
-    }
-
     #endregion PublicMethods
 
     #region Commands
@@ -97,10 +92,7 @@ public partial class TaskEditViewModel : ObservableObject
         {
             return;
         }
-        if (CurrentConfig is not null)
-        {
-            SaveCurrentConfig();
-        }
+        CurrentConfig?.SaveConfig();
         M9AConfigViewModel temp = M9AConfigViewModel.NewConfig(newConfigName);
         ConfigFiles.Add(temp.M9aConfig.ConfigName);
         ConfigFileIndex = ConfigFiles.Count - 1;
@@ -110,9 +102,11 @@ public partial class TaskEditViewModel : ObservableObject
     [RelayCommand]
     private void DeleteConfig(int index)
     {
-        string temp = ConfigFiles[index];
-        configFiles.RemoveAt(index);
-        M9AConfigManager.DeleteConfig(temp);
+        if (index >= 0)
+        {
+            CurrentConfig?.DeleteConfig();
+            ConfigFiles.RemoveAt(index);
+        }
     }
 
     #endregion Commands

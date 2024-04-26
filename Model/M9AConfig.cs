@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using M9AWPF.JsonSerializeObject;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-using M9AWPF.JsonSerializeObject;
 
 namespace M9AWPF.Model;
 
 public class M9AConfig
 {
-
     private static readonly JsonSerializerOptions defaultSerializeOptions =
         new() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
 

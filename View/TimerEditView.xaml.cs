@@ -16,13 +16,14 @@ using System.Windows.Shapes;
 namespace M9AWPF.View
 {
     /// <summary>
-    /// TimerView.xaml 的交互逻辑
+    /// TimerEditView.xaml 的交互逻辑
     /// </summary>
-    public partial class TimerView : UserControl
+    public partial class TimerEditView : UserControl
     {
-        public TimerView()
+        public TimerEditView()
         {
             InitializeComponent();
         }
+
     }
 }

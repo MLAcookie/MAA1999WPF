@@ -13,7 +13,7 @@ public partial class NavigationViewModel : ObservableObject
         {
             { "Home", new HomeView() },
             { "TaskEdit", new TaskEditView() },
-            { "Timer", new TimerView() },
+            { "Timer", new TimerEditView() },
             { "Setting", new SettingView() },
         };
 

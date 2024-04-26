@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using M9AWPF.Constants;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using M9AWPF.Constants;
 
 namespace M9AWPF.Model;
 
@@ -30,7 +30,7 @@ public static class M9AConfigManager
         get { return nameToPath.Keys.ToList(); }
     }
 
-    public static Dictionary<string, bool> IsConfigChanged = new();
+    public static Dictionary<string, bool> IsConfigChanged { get; set; } = new();
 
     #endregion Properties
 
@@ -79,5 +79,11 @@ public static class M9AConfigManager
     }
 
     public static void DeleteConfig(string name)
-    { }
+    {
+        File.Delete(NameToPath[name]);
+        NameToPath.Remove(name);
+        NameToObject.Remove(name);
+        IsConfigChanged.Remove(name);
+        ConfigNames.Remove(name);
+    }
 }

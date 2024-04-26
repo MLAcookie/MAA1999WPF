@@ -111,6 +111,7 @@
         <cc:TaskOverview
             x:Name="LocalTaskOverview"
             Grid.Column="2"
+            Margin="10"
             CurrentM9AConfig="{Binding CurrentConfig}" />
     </Grid>
 </UserControl>
