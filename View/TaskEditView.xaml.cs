@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Interop;
-using HandyControl.Controls;
-using HandyControl.Tools;
-using HandyControl.Tools.Extension;
 using M9AWPF.CustomControls;
 using M9AWPF.ViewModel;
 
@@ -24,7 +18,7 @@ public partial class TaskEditView : UserControl
     [DllImport("user32")]
     public static extern IntPtr SetFocus(IntPtr hWnd);
 
-    TaskEditViewModel viewModel;
+    private TaskEditViewModel viewModel;
 
     public TaskEditView()
     {
@@ -33,6 +27,7 @@ public partial class TaskEditView : UserControl
     }
 
     #region Events
+
     private void TaskTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         TaskSettingPanel.Children.Clear();
@@ -81,6 +76,8 @@ public partial class TaskEditView : UserControl
 
     private async void NewConfigButton_Click(object sender, RoutedEventArgs e)
     {
+        NewConfigTextBox.Text = "";
+
         await Task.Yield();
         NewConfigPopup.IsOpen = true;
 
@@ -90,17 +87,10 @@ public partial class TaskEditView : UserControl
         SetFocus(source.Handle);
     }
 
-    private void ChooseConfig_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        LocalTaskOverview.ItemsRefresh();
-        ChooseConfig_ComboBox.Items.Refresh();
-    }
-
     private void NewConfigConfirmButton_Click(object sender, RoutedEventArgs e)
     {
-        viewModel.NewConfig(NewConfigTextBox.Text);
-        ChooseConfig_ComboBox.Items.Refresh();
         NewConfigPopup.IsOpen = false;
     }
-    #endregion
+
+    #endregion Events
 }

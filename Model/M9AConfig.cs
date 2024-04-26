@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -12,10 +11,11 @@ namespace M9AWPF.Model;
 
 public class M9AConfig
 {
-    static readonly JsonSerializerOptions defaultSerializeOptions =
+
+    private static readonly JsonSerializerOptions defaultSerializeOptions =
         new() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
 
-    readonly M9AConfigObject m9AConfigObject;
+    private readonly M9AConfigObject m9AConfigObject;
 
     public string ConfigName { get; set; }
 
@@ -39,7 +39,7 @@ public class M9AConfig
         set { m9AConfigObject.task = value; }
     }
 
-    public M9AConfig(string configPath)
+    internal M9AConfig(string configPath)
     {
         ConfigPath = configPath;
         ConfigName = Path.GetFileName(configPath);

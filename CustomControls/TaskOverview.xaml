@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </Border.Resources>
     <hc:ScrollViewer>
-        <ItemsControl Name="TaskList_ItemControl" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=TaskSource, UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl Name="TaskList_ItemControl" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=CurrentM9AConfig.M9aTasks, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="vm:MAATaskViewModel">
                     <Border

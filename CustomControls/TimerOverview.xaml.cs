@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,14 +23,14 @@ namespace M9AWPF.CustomControls;
 public partial class TimerOverview : Border
 {
     #region TaskSource_propdp
-    public List<TimerTaskViewModel> TaskSource
+    public Collection<TimerTaskViewModel> TaskSource
     {
-        get { return (List<TimerTaskViewModel>)GetValue(TaskSourceProperty); }
+        get { return (Collection<TimerTaskViewModel>)GetValue(TaskSourceProperty); }
         set { SetValue(TaskSourceProperty, value); }
     }
     public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
         "TaskSource",
-        typeof(List<TimerTaskViewModel>),
+        typeof(Collection<TimerTaskViewModel>),
         typeof(TimerOverview),
         null
     );

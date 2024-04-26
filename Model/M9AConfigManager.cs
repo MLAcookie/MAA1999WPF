@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using M9AWPF.Constants;
 
@@ -11,12 +8,13 @@ namespace M9AWPF.Model;
 
 public static class M9AConfigManager
 {
-    static readonly string ConfigPath = ConfKeys.UIManagedConfig;
+    private static readonly string ConfigPath = ConfKeys.UIManagedConfig;
 
-    static Dictionary<string, string> nameToPath = new();
-    static Dictionary<string, M9AConfig> nameToObject = new();
+    private static Dictionary<string, string> nameToPath = new();
+    private static Dictionary<string, M9AConfig> nameToObject = new();
 
     #region Properties
+
     public static Dictionary<string, string> NameToPath
     {
         get { return nameToPath; }
@@ -33,7 +31,8 @@ public static class M9AConfigManager
     }
 
     public static Dictionary<string, bool> IsConfigChanged = new();
-    #endregion
+
+    #endregion Properties
 
     static M9AConfigManager()
     {
@@ -78,8 +77,7 @@ public static class M9AConfigManager
         IsConfigChanged[name] = true;
         return newConfig;
     }
-    public static void DeleteConfig(string name)
-    {
 
-    }
+    public static void DeleteConfig(string name)
+    { }
 }

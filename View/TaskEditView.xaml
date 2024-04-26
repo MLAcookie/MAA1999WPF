@@ -31,7 +31,6 @@
                 hc:TitleElement.TitleWidth="100"
                 ItemsSource="{Binding ConfigFiles}"
                 SelectedIndex="{Binding ConfigFileIndex, UpdateSourceTrigger=PropertyChanged}"
-                SelectionChanged="ChooseConfig_ComboBox_SelectionChanged"
                 Style="{StaticResource ComboBoxExtend}" />
             <StackPanel Margin="5" Orientation="Horizontal">
                 <Button
@@ -62,6 +61,8 @@
                                 Name="NewConfigConfirmButton"
                                 Margin="5"
                                 Click="NewConfigConfirmButton_Click"
+                                Command="{Binding NewConfigCommand}"
+                                CommandParameter="{Binding ElementName=NewConfigTextBox, Path=Text}"
                                 Content="Add" />
                         </StackPanel>
                     </Border>
@@ -110,6 +111,6 @@
         <cc:TaskOverview
             x:Name="LocalTaskOverview"
             Grid.Column="2"
-            TaskSource="{Binding M9aTasks}" />
+            CurrentM9AConfig="{Binding CurrentConfig}" />
     </Grid>
 </UserControl>

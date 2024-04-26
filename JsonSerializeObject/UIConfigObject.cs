@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 
 namespace M9AWPF.JsonSerializeObject;
 
 [Serializable]
-class UIConfigObject
+internal class UIConfigObject
 {
     public string ADBPath { get; set; } = string.Empty;
     public string ADBPort { get; set; } = string.Empty;
@@ -17,7 +16,7 @@ class UIConfigObject
 }
 
 [Serializable]
-class TimerTaskObject
+internal class TimerTaskObject
 {
     public string Time { get; set; } = string.Empty;
     public string ConfigFilePath { get; set; } = string.Empty;

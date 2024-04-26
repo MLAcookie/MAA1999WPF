@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using M9AWPF.ViewModel;
 
@@ -13,28 +9,28 @@ namespace M9AWPF.CustomControls;
 /// </summary>
 public partial class TaskOverview : Border
 {
-    #region TaskSource_propdp
-    public List<M9ATaskViewModel> TaskSource
-    {
-        get { return (List<M9ATaskViewModel>)GetValue(TaskSourceProperty); }
-        set { SetValue(TaskSourceProperty, value); }
-    }
-    public static readonly DependencyProperty TaskSourceProperty = DependencyProperty.Register(
-        "TaskSource",
-        typeof(List<M9ATaskViewModel>),
+    #region CurrentM9AConfig_propdp
+
+    public static readonly DependencyProperty CurrentM9AConfigProperty = DependencyProperty.Register(
+        "CurrentM9AConfig",
+        typeof(M9AConfigViewModel),
         typeof(TaskOverview),
         null
     );
-    #endregion
 
-    #region IsEnableContextMenu_propdp
-    public bool IsEnableContextMenu
+    public M9AConfigViewModel CurrentM9AConfig
     {
-        get { return (bool)GetValue(IsEnableContextMenuProperty); }
-        set { SetValue(IsEnableContextMenuProperty, value); }
+        get { return (M9AConfigViewModel)GetValue(CurrentM9AConfigProperty); }
+        set
+        {
+            SetValue(CurrentM9AConfigProperty, value);
+        }
     }
 
-    // Using a DependencyProperty as the backing store for IsEnableContextMenu.  This enables animation, styling, binding, etc...
+    #endregion CurrentM9AConfig_propdp
+
+    #region IsEnableContextMenu_propdp
+
     public static readonly DependencyProperty IsEnableContextMenuProperty =
         DependencyProperty.Register(
             "IsEnableContextMenu",
@@ -42,7 +38,14 @@ public partial class TaskOverview : Border
             typeof(TaskOverview),
             new PropertyMetadata(true)
         );
-    #endregion
+
+    public bool IsEnableContextMenu
+    {
+        get { return (bool)GetValue(IsEnableContextMenuProperty); }
+        set { SetValue(IsEnableContextMenuProperty, value); }
+    }
+
+    #endregion IsEnableContextMenu_propdp
 
     public TaskOverview()
     {
@@ -50,14 +53,15 @@ public partial class TaskOverview : Border
     }
 
     #region ClickEvents
+
     private void Delete_MenuItem_Click(object sender, RoutedEventArgs e)
     {
         var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
-        for (int i = 0; i < TaskSource.Count; i++)
+        for (int i = 0; i < CurrentM9AConfig.M9aTasks.Count; i++)
         {
-            if (TaskSource[i] == selectM9ATask)
+            if (CurrentM9AConfig.M9aTasks[i] == selectM9ATask)
             {
-                TaskSource.RemoveAt(i);
+                CurrentM9AConfig.M9aTasks.RemoveAt(i);
                 break;
             }
         }
@@ -67,13 +71,13 @@ public partial class TaskOverview : Border
     private void MoveDown_MenuItem_Click(object sender, RoutedEventArgs e)
     {
         var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
-        for (int i = 0; i < TaskSource.Count; i++)
+        for (int i = 0; i < CurrentM9AConfig.M9aTasks.Count; i++)
         {
-            if (TaskSource[i] == selectM9ATask)
+            if (CurrentM9AConfig.M9aTasks[i] == selectM9ATask)
             {
-                if (i == TaskSource.Count - 1)
+                if (i == CurrentM9AConfig.M9aTasks.Count - 1)
                     return;
-                (TaskSource[i], TaskSource[i + 1]) = (TaskSource[i + 1], TaskSource[i]);
+                (CurrentM9AConfig.M9aTasks[i], CurrentM9AConfig.M9aTasks[i + 1]) = (CurrentM9AConfig.M9aTasks[i + 1], CurrentM9AConfig.M9aTasks[i]);
                 break;
             }
         }
@@ -83,22 +87,20 @@ public partial class TaskOverview : Border
     private void MoveUp_MenuItem_Click(object sender, RoutedEventArgs e)
     {
         var selectM9ATask = ((sender as MenuItem)!.DataContext as M9ATaskViewModel)!;
-        for (int i = 0; i < TaskSource.Count; i++)
+        for (int i = 0; i < CurrentM9AConfig.M9aTasks.Count; i++)
         {
-            if (TaskSource[i] == selectM9ATask)
+            if (CurrentM9AConfig.M9aTasks[i] == selectM9ATask)
             {
                 if (i == 0)
                     return;
-                (TaskSource[i], TaskSource[i - 1]) = (TaskSource[i - 1], TaskSource[i]);
+                (CurrentM9AConfig.M9aTasks[i], CurrentM9AConfig.M9aTasks[i - 1]) = (CurrentM9AConfig.M9aTasks[i - 1], CurrentM9AConfig.M9aTasks[i]);
                 break;
             }
         }
         ItemsRefresh();
     }
-    #endregion
 
-    public void ItemsRefresh()
-    {
-        TaskList_ItemControl.Items.Refresh();
-    }
+    #endregion ClickEvents
+
+    public void ItemsRefresh() => TaskList_ItemControl.Items.Refresh();
 }

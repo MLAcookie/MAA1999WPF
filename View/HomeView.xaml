@@ -75,7 +75,7 @@
                 <cc:TimerOverview IsEnableContextMenu="False" />
             </cc:DoubleViewContainer.ViewTrue>
             <cc:DoubleViewContainer.ViewFalse>
-                <cc:TaskOverview IsEnableContextMenu="False" TaskSource="{Binding ConfigTasks}" />
+                <cc:TaskOverview IsEnableContextMenu="False" />
             </cc:DoubleViewContainer.ViewFalse>
         </cc:DoubleViewContainer>
     </Grid>
