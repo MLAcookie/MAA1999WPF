@@ -20,17 +20,19 @@ public static class ConfKeys
     public static readonly string M9ABin = Path.Combine(M9ARoot, "MaaPiCli.exe");
 
     // 下载临时存放文件夹
-    public static readonly string TempDownload = "./temp";
+    public static readonly string TempDownloadFolder = "./temp";
 
     // 临时存放解压文件
-    public static readonly string TempLatest = Path.Combine(TempDownload, "latest");
+    public static readonly string TempLatest = Path.Combine(TempDownloadFolder, "latest");
 
     // 临时备份config
-    public static readonly string TempConfigBackup = Path.Combine(TempDownload, "config");
+    public static readonly string TempConfigBackup = Path.Combine(TempDownloadFolder, "config");
 
     // UI配置文件
     public static readonly string UIConfig = "./UIConfig.json";
 
     // UI生成的config文件
-    public static readonly string UIManagedConfig = "./config";
+    public static readonly string UIManagedConfigFolder = "./config";
+
+    public static readonly string UIVersion = "v1.0";
 }

@@ -1,14 +1,14 @@
-﻿using M9AWPF.Constants;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using M9AWPF.Constants;
 
 namespace M9AWPF.Model;
 
 public static class M9AConfigManager
 {
-    private static readonly string ConfigPath = ConfKeys.UIManagedConfig;
+    private static readonly string ConfigPath = ConfKeys.UIManagedConfigFolder;
 
     private static Dictionary<string, string> nameToPath = new();
     private static Dictionary<string, M9AConfig> nameToObject = new();
@@ -30,7 +30,7 @@ public static class M9AConfigManager
         get { return nameToPath.Keys.ToList(); }
     }
 
-    public static Dictionary<string, bool> IsConfigChanged { get; set; } = new();
+    public static Dictionary<string, bool> IsConfigChanged = new();
 
     #endregion Properties
 
@@ -59,7 +59,7 @@ public static class M9AConfigManager
         {
             if (config.Value)
             {
-                await NameToObject[config.Key].SaveConfig();
+                await NameToObject[config.Key].SaveConfigAsync();
             }
         }
     }
@@ -79,11 +79,5 @@ public static class M9AConfigManager
     }
 
     public static void DeleteConfig(string name)
-    {
-        File.Delete(NameToPath[name]);
-        NameToPath.Remove(name);
-        NameToObject.Remove(name);
-        IsConfigChanged.Remove(name);
-        ConfigNames.Remove(name);
-    }
+    { }
 }

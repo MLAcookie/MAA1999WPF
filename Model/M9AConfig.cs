@@ -1,24 +1,32 @@
-﻿using M9AWPF.JsonSerializeObject;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
+using M9AWPF.JsonSerializeObject;
 
 namespace M9AWPF.Model;
 
+public enum M9AResourceType
+{
+    Official,
+    Bilibili,
+}
+
 public class M9AConfig
 {
-    private static readonly JsonSerializerOptions defaultSerializeOptions =
-        new() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
+    private static readonly JsonSerializerOptions defaultSerializeOptions = new()
+    {
+        Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+    };
 
     private readonly M9AConfigObject m9AConfigObject;
 
-    public string ConfigName { get; set; }
+    public string ConfigName { get; }
 
-    public string ConfigPath { get; set; }
+    public string ConfigPath { get; }
 
     public string ADBPath
     {
@@ -55,7 +63,14 @@ public class M9AConfig
         }
     }
 
-    public async Task SaveConfig()
+    public void SaveConfig()
+    {
+        var jsonString = JsonSerializer.Serialize(m9AConfigObject, defaultSerializeOptions);
+        File.WriteAllText(ConfigPath, jsonString, new UTF8Encoding(false));
+        M9AConfigManager.IsConfigChanged[ConfigName] = false;
+    }
+
+    public async Task SaveConfigAsync()
     {
         var jsonString = JsonSerializer.Serialize(m9AConfigObject, defaultSerializeOptions);
         await File.WriteAllTextAsync(ConfigPath, jsonString, new UTF8Encoding(false));

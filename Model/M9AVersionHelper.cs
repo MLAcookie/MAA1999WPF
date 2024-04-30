@@ -88,9 +88,9 @@ namespace M9AWPF.Model
         public static async Task GetLatestM9ARelase()
         {
             //文件夹路径检查
-            if (!Directory.Exists(ConfKeys.TempDownload))
+            if (!Directory.Exists(ConfKeys.TempDownloadFolder))
             {
-                Directory.CreateDirectory(ConfKeys.TempDownload);
+                Directory.CreateDirectory(ConfKeys.TempDownloadFolder);
             }
             if (!Directory.Exists(ConfKeys.TempLatest))
             {
@@ -101,7 +101,7 @@ namespace M9AWPF.Model
             {
                 if (asset.name.Contains("win-x86_64"))
                 {
-                    string downloadFilePath = Path.Combine(ConfKeys.TempDownload, asset.name);
+                    string downloadFilePath = Path.Combine(ConfKeys.TempDownloadFolder, asset.name);
                     //有同名文件的话不下载
                     if (!File.Exists(downloadFilePath))
                     {

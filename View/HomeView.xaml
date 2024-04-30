@@ -43,6 +43,7 @@
                         Name="UseTimerButton"
                         Grid.Column="1"
                         Width="100"
+                        IsChecked="{Binding IsUseTimer}"
                         Style="{StaticResource ToggleButtonSwitch}" />
                 </Grid>
                 <ComboBox
@@ -52,8 +53,8 @@
                     hc:TitleElement.Title="Select config"
                     hc:TitleElement.TitlePlacement="Left"
                     hc:TitleElement.TitleWidth="100"
-                    ItemsSource="{Binding Configs}"
-                    SelectedIndex="{Binding ConfigIndex}"
+                    ItemsSource="{Binding ConfigFiles}"
+                    SelectedIndex="{Binding SelectIndex}"
                     Style="{StaticResource ComboBoxExtend}"
                     Visibility="{Binding ElementName=UseTimerButton, Path=IsChecked, Converter={StaticResource Boolean2VisibilityReConverter}}" />
             </StackPanel>
@@ -75,7 +76,7 @@
                 <cc:TimerOverview IsEnableContextMenu="False" />
             </cc:DoubleViewContainer.ViewTrue>
             <cc:DoubleViewContainer.ViewFalse>
-                <cc:TaskOverview IsEnableContextMenu="False" />
+                <cc:TaskOverview CurrentM9AConfig="{Binding CurrentConfig}" IsEnableContextMenu="False" />
             </cc:DoubleViewContainer.ViewFalse>
         </cc:DoubleViewContainer>
     </Grid>

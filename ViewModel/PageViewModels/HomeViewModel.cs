@@ -1,32 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using M9AWPF.Constants;
 using M9AWPF.Model;
 
 namespace M9AWPF.ViewModel;
 
 public partial class HomeViewModel : ObservableObject
 {
-    private M9AConfig currentConfig;
-
-    #region Properties
-
-    private int configIndex = -1;
-
-    public int ConfigIndex
+    public HomeViewModel()
     {
-        get { return configIndex; }
-        set
+        if (UIConfigManager.IsLastUseTimer)
         {
-            configIndex = value;
-            currentConfig = M9AConfigManager.NameToObject[Configs[value]];
-            ConfigTasks = M9ATaskViewModel.ToTaskVMCollection(currentConfig);
-            M9AConfigManager.IsConfigChanged[Configs[value]] = true;
+            IsUseTimer = true;
+        }
+        if (UIConfigManager.LastSelectConfig is not null)
+        {
+            SelectIndex = ConfigFiles.IndexOf(UIConfigManager.LastSelectConfig);
+            CurrentConfig = M9AConfigViewModel.GetVMFromConfigName(UIConfigManager.LastSelectConfig);
         }
     }
-
-    #endregion Properties
 
     #region AutoProperties
 
@@ -37,7 +30,7 @@ public partial class HomeViewModel : ObservableObject
 
     public string UIVersion
     {
-        get { return "UI Verion: "; }
+        get { return $"UI Verion: {ConfKeys.UIVersion}"; }
     }
 
     #endregion AutoProperties
@@ -45,19 +38,31 @@ public partial class HomeViewModel : ObservableObject
     #region ObservableProperties
 
     [ObservableProperty]
-    private List<string> configs = M9AConfigManager.ConfigNames;
+    private List<string> configFiles = M9AConfigManager.ConfigNames;
 
     [ObservableProperty]
-    private ObservableCollection<M9ATaskViewModel> configTasks;
+    private M9AConfigViewModel currentConfig;
+
+    [ObservableProperty]
+    private int selectIndex = -1;
+
+    partial void OnSelectIndexChanged(int value)
+    {
+        CurrentConfig = M9AConfigViewModel.GetVMFromConfigName(ConfigFiles[value]);
+    }
+
+    [ObservableProperty]
+    private bool isUseTimer = false;
 
     #endregion ObservableProperties
 
-    public HomeViewModel()
-    { }
+    #region Commands
 
     [RelayCommand]
     public void StartM9A()
     {
         ConsoleBehavior.Instance.Start();
     }
+
+    #endregion Commands
 }

@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using M9AWPF.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using M9AWPF.Model;
 
 namespace M9AWPF.ViewModel;
 
@@ -56,7 +56,7 @@ public partial class TaskEditViewModel : ObservableObject
     partial void OnConfigFileIndexChanged(int value)
     {
         CurrentConfig?.SaveConfig();
-        CurrentConfig = M9AConfigViewModel.GetVMFromString(ConfigFiles[value]);
+        CurrentConfig = M9AConfigViewModel.GetVMFromConfigName(ConfigFiles[value]);
     }
 
     [ObservableProperty]

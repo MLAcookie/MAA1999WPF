@@ -9,5 +9,4 @@ namespace M9AWPF.Model;
 public class EmulatorBehavior
 {
     private static readonly string EmulatorPath;
-
 }
